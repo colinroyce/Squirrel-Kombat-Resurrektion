@@ -33,8 +33,9 @@ Since then:
 - Pausing (P) shows a move guide: the controls and every fighter's special moves in your own keys,
   one page each, flipped with the arrow keys. (An addition: in 1999 the moves were in a separate
   text file.)
-- 2 Players in One on One: click 2 Players on the character screen; player 2 picks with their
-  walk keys (L and '). When the fighters get more than a screen apart, the screen splits in two.
+- 2 Players in One on One: click 2 Players on the character screen. Each player picks with their
+  walk keys (A / D and L / '), or by clicking fighters: clicks take turns, player 1 first (an
+  addition; the original only used the keys). When the fighters get more than a screen apart, the screen splits in two.
 - Practice mode: hit the training dummy (nobody gets hurt) while tutorial tips cycle above.
 - Credits: click the CREDITS corner of the title screen.
 - The title screen has no QUIT button (an addition: there's nothing to quit in a browser).

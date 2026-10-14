@@ -244,6 +244,9 @@ capstone, and a patched deark.
   presses (forward / back / up arrows, P K U S) and flashes the special move's name in green when its
   keys are recognised. Names come from the pause guide's move list. On by default; switched on the
   Cheats page. No failure flash (Colin's choice): the original never knows a combo was attempted.
+- **Two-player fighter picking by mouse** (`TwoPlayerClick` / `TwoPlayerHint` in
+  `src/screens/select.js`): the original ignores clicks on the fighters with 2 players; here clicks
+  take turns (player 1, then player 2), and a red line under "USE WALK KEYS…" shows both players' keys.
 - **No QUIT button on the title screen** (Colin's choice): a web page has nothing to quit to
   (`NewTitleScreenSprites` in `src/screens/title.js`).
 - **No music during fights**: the theme plays on the title, character and scene screens and stops
