@@ -33,8 +33,9 @@ Since then:
 - Pausing (P) shows a move guide: the controls and every fighter's special moves in your own keys,
   one page each, flipped with the arrow keys. (An addition: in 1999 the moves were in a separate
   text file.)
-- 2 Players in One on One: click 2 Players on the character screen; player 2 picks with their
-  walk keys (L and '). When the fighters get more than a screen apart, the screen splits in two.
+- 2 Players in One on One: click 2 Players on the character screen. Each player picks with their
+  walk keys (A / D and L / '), or by clicking fighters: clicks take turns, player 1 first (an
+  addition; the original only used the keys). When the fighters get more than a screen apart, the screen splits in two.
 - Practice mode: hit the training dummy (nobody gets hurt) while tutorial tips cycle above.
 - Credits: click the CREDITS corner of the title screen.
 - The title screen has no QUIT button (an addition: there's nothing to quit in a browser).
@@ -56,6 +57,9 @@ first. The CPU picks its fighter at random.
   `assets/added/`).
 - Military Muskrat is unlocked by winning the Tournament, or by the original's secret key code,
   or on the Cheats page. For testing, adding `?debug` to the address unlocks him.
+- A combo display under your life bar shows your key presses as you make them and flashes a
+  special move's name in green when you pull it off (player 2's is on the right). Turn it off on
+  the Cheats page.
 - Cheats aren't hidden: Options → CHEATS switches super blood and Military Muskrat on and off, and
   shows the original's codes (type FIREMONKEY on the title screen for super blood; press left,
   jump, right, punch, uppercut, spin kick on the character screen for Military Muskrat). The
@@ -68,8 +72,9 @@ first. The CPU picks its fighter at random.
 ## Controls
 
 These are the defaults. You can change them in Options → Keys, and they're saved in the browser.
-They're an addition: the original's uppercut was Space and player 2 used the number pad, so the new
-layout lets two players share a laptop keyboard (player 2's keys mirror player 1's).
+Player 1's are the original's. Player 2's are an addition: the original put player 2 on the number
+pad, so the new layout mirrors player 1's to let two players share a laptop keyboard. In two-player
+games player 1's uppercut becomes Left Shift (while it's still set to Space), to match player 2's.
 
 | Action | Player 1 | Player 2 |
 |---|---|---|
@@ -77,7 +82,7 @@ layout lets two players share a laptop keyboard (player 2's keys mirror player 1
 | Jump | W | P |
 | Punch | S | ; |
 | Kick | E | [ |
-| Uppercut | Left Shift | Right Shift |
+| Uppercut | Space (Left Shift with 2 players) | Right Shift |
 | Spin kick | Q | O |
 
 Other keys:

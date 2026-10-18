@@ -54,7 +54,7 @@ public.
     dripping cursor appear only with Options → Blood → ON. This matches the original, so leave it.
 11. **Military Muskrat is unlocked by winning the Tournament** (Colin's choice, an addition).
     - The original's way, a key code on the character screen (six presses in a row: left, jump,
-      right, punch, uppercut, spin; A W D S L Shift Q by default), also works, as a cheat (see 5).
+      right, punch, uppercut, spin; A W D S Space Q by default), also works, as a cheat (see 5).
       See docs/SPEC.md "Military Muskrat".
     - The original Tournament can't be won (its 12th place is left empty), so Colin chose to make
       Military Muskrat the 12th, final opponent. Beating him unlocks him (`UnlockMuskrat` in
@@ -149,6 +149,7 @@ Code map (`src/`):
   - `hud.js` — life bars, scores, rounds, timer, radar, hint
   - `fade.js`
   - `quakes.js` — screen shakes
+  - `combofeed.js` — the combo display (an addition)
   - `common.js` — cursor, screen transitions, `nextFrame`
 - **`screens/`:**
   - `splash.js` — the Monkey Farm splash and the loading screen
@@ -238,6 +239,14 @@ capstone, and a patched deark.
   button's art is built from the original buttons' letters (`assets/added/cheats-button.png`, made
   by `tools/extract/cheats_button.py`). Cheats are remembered in the browser (the original forgot
   them on quitting).
+- **The combo display** (`src/combofeed.js`, fed by `RecordKey1/2` and `CheckMoves` in
+  `src/fight/game.js`): a see-through strip under each human player's life bar shows their last key
+  presses (forward / back / up arrows, P K U S) and flashes the special move's name in green when its
+  keys are recognised. Names come from the pause guide's move list. On by default; switched on the
+  Cheats page. No failure flash (Colin's choice): the original never knows a combo was attempted.
+- **Two-player fighter picking by mouse** (`TwoPlayerClick` / `TwoPlayerHint` in
+  `src/screens/select.js`): the original ignores clicks on the fighters with 2 players; here clicks
+  take turns (player 1, then player 2), and a red line under "USE WALK KEYS…" shows both players' keys.
 - **No QUIT button on the title screen** (Colin's choice): a web page has nothing to quit to
   (`NewTitleScreenSprites` in `src/screens/title.js`).
 - **No music during fights**: the theme plays on the title, character and scene screens and stops
@@ -248,11 +257,13 @@ capstone, and a patched deark.
   fighter (combos in the player's current keys, facing right; Military Muskrat hidden until
   unlocked), flipped with the arrow or walk keys or the on-screen buttons. The original pause only
   showed PICT 9000. The original paused on P and quit on Esc; now only Esc pauses (P is player 2's
-  jump) and quitting a fight is the guide's QUIT button.
+  jump) and quitting a fight is the guide's QUIT button. The menus' squirrel-head cursor is drawn on the guide (no blood
+  drips) so its buttons are easy to click.
 - **The pause picture shows only PAUSED**: PICT 9000's "HIT P TO UNPAUSE" line is cut off, since P no
   longer pauses (`drawPaused` in `src/screens/pauseguide.js`).
-- **New default keys** (`DEFAULT_KEYS` in `src/state.js`): player 1's uppercut is Left Shift (was
-  Space); player 2 is L ' P ; [ O and Right Shift (was the number pad). Right Shift gets its own key
+- **New default keys** (`DEFAULT_KEYS` in `src/state.js`): player 2 is L ' P ; [ O and Right Shift
+  (was the number pad). Player 1 keeps the original keys, but in two-player games their uppercut is
+  Left Shift while it is still set to Space (Colin's choice; `GetKey`). Right Shift gets its own key
   code (`src/input.js`). Saved keys still on an original default move to the new ones.
 - New art goes in `assets/added/`, with a line in `assets/added/README.md`.
 - Never hand-edit the extracted originals in `assets/`; regenerate them with `tools/extract`.
@@ -282,3 +293,6 @@ capstone, and a patched deark.
 - The work branch is `claude/eloquent-curie-vv5eha`, which is also the repo's default branch.
 - Colin uses GitHub Desktop.
 - `re/` and `reference/` are ignored and must never be committed.
+- The repo is now `colinroyce/Squirrel-Kombat-Resurrektion`. GitHub Pages publishes the default branch
+  (`claude/eloquent-curie-vv5eha`, root) at https://colinroyce.github.io/Squirrel-Kombat-Resurrektion/ and
+  rebuilds on every push to it.

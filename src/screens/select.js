@@ -1,7 +1,7 @@
 // Character selection (OpenSelection / RunSelection) and the start of a fight.
 
 import { Rand, TickCount, insetRect, offsetRect, ptInRect, setRect } from '../mac.js';
-import { fillBackWithPict } from '../gfx.js';
+import { drawString, fillBackWithPict, foreColor, kctx, stringWidth } from '../gfx.js';
 import { Button, CheckKey, GetMouse } from '../input.js';
 import {
   DoHandleCamera, DontHandleCamera, GetSplit, HandleCamera, HandleCameraSplit, HandleCameras, OffCamera,
@@ -26,8 +26,12 @@ import { InitTournament, OpenTournamentScreen } from './tournament.js';
 import { DoTitle } from './title.js';
 import { CreatePlayers, DoRoundAnimation, InitKeyRecorder, Run, SetPercents, fight } from '../fight/game.js';
 import { InitScene } from '../fight/forest.js';
+import { keyName } from './keys.js';
 
-const S = { done: 0, result: 0, lastChange: 0, hovered: -1, charRects: [], skeys: [-1, -1, -1, -1, -1, -1], nskeys: 0 };
+const S = {
+  done: 0, result: 0, lastChange: 0, hovered: -1, charRects: [], skeys: [-1, -1, -1, -1, -1, -1], nskeys: 0,
+  wasDown: true, clickTurn: 0, // two-player clicks (an addition, see TwoPlayerClick)
+};
 
 export function InitSelectionData() {
   sel.chosen = [0, 0, 0, 0];
@@ -65,7 +69,7 @@ export async function OpenSelection() {
   DontDrawLifeBars();
   SetRenderOptions(0, 0);
   OffCamera(-5000, -5000);
-  fillBackWithPict(4000, 640, 480);
+  TwoPlayerHint(); // background PICT 4000, plus the two-player key line (an addition)
   KillAllSprites();
   DontHandleCamera();
   NewSelectionScreenSprites();
@@ -75,6 +79,8 @@ export async function OpenSelection() {
   S.done = 0;
   S.skeys.fill(-1);
   S.nskeys = 0;
+  S.clickTurn = 0;
+  S.wasDown = true;
   if (sel.numChars === 12) CreateSecretSelector(S.charRects[11]);
   await FadeBack(0);
   PlaySound(15);
@@ -169,7 +175,37 @@ function cycle(p, step) {
   PlaySound(0x12);
 }
 
+// Not in the original (Colin's request): the original ignores clicks on the fighters with 2 players
+// (each picks with their walk keys). Here each new click on a fighter picks for player 1, then
+// player 2, then player 1 again, and a line on screen shows both players' keys (TwoPlayerHint).
+function TwoPlayerClick() {
+  const down = Button();
+  const fresh = down && !S.wasDown;
+  S.wasDown = down;
+  if (!fresh || GetNumPlayers() !== 2) return;
+  const m = GetMouse();
+  for (let i = 0; i < sel.numChars; i++) {
+    const r = S.charRects[i];
+    const below = { ...r };
+    offsetRect(below, 0, 30);
+    if ((ptInRect(m.h, m.v, r) || ptInRect(m.h, m.v, below)) && CheckChars(i)) {
+      ChooseChar(S.clickTurn, i);
+      PlaySound(0x12);
+      S.clickTurn ^= 1;
+      return;
+    }
+  }
+}
+
+function TwoPlayerHint() {
+  fillBackWithPict(4000, 640, 480);
+  if (GetNumPlayers() !== 2) return;
+  const text = `PLAYER 1: ${keyName(0)} / ${keyName(2)}     PLAYER 2: ${keyName(7)} / ${keyName(9)}     OR CLICK, TAKING TURNS`;
+  drawString(kctx, 320 - (stringWidth(text, 9, true) >> 1), 172, text, 9, foreColor(0xcd), true);
+}
+
 function CheckSelectionKeyDown() {
+  TwoPlayerClick();
   if (Button() && GetNumPlayers() === 1) {
     const m = GetMouse();
     for (let i = 0; i < sel.numChars; i++) {
@@ -301,6 +337,7 @@ function HandleOnePlayer(s) {
     if (ptInRect(m.h, m.v, s.rect) && Button()) {
       PlaySound(0x10);
       SetNumPlayers(1);
+      TwoPlayerHint();
       KillSpriteByNumber(8);
       KillSpriteByNumber(10);
       SetSpriteAction1(6, 3);
@@ -320,6 +357,9 @@ function HandleTwoPlayers(s) {
       PlaySound(0x10);
       NewTwoOnTwoSprite();
       SetNumPlayers(2);
+      S.clickTurn = 0;
+      S.wasDown = true; // this click was on the 2 Players icon
+      TwoPlayerHint();
     }
   }
 }
