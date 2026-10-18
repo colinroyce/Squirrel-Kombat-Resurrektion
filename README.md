@@ -1,53 +1,46 @@
-# Squirrel Kombat Resurrection
+# Squirrel Kombat Resurrektion
 
-A faithful browser recreation of **Squirrel Kombat** (Monkey Farm Software, 1999, classic Mac OS),
-built from the original game's own art, sound and code.
+> This is a mostly faithful re-creation of **Squirrel Kombat** (Monkey Farm Software, 1999), built by
+> Colin Grushkin and Claude Code. If John Butler, or anyone associated with the original Monkey Farm
+> Software, would like this repository and its GitHub Pages site taken down, I will do so. Just reach
+> out and let me know by [opening an issue](https://github.com/colinroyce/Squirrel-Kombat-Resurrektion/issues/new)
+> on this repository.
 
-## Running it
+A browser recreation of **Squirrel Kombat** (Monkey Farm Software, 1999, classic Mac OS), built from
+the original game's own art, sound and code.
 
-The game is plain HTML and JavaScript modules with no build step. Browsers won't load modules from
-`file://`, so serve the repository root over HTTP:
+## Play it
 
-```sh
-python3 -m http.server 8000
-```
+**▶ [Play in your browser](https://colinroyce.github.io/Squirrel-Kombat-Resurrektion/)**. Nothing to
+install. Click (or press a key) to start; browsers only allow sound after a click or key press. You
+need a keyboard, so play on a computer rather than a phone. Esc pauses and shows every fighter's
+moves.
 
-Then open <http://localhost:8000/> and click (or press a key) to start. Browsers only allow sound
-after a click or key press. The 640×480 screen is scaled to fill the window, keeping its 4:3 shape.
+All original art, sound, music and game design © Monkey Farm Software, 1999. This is a free,
+non-commercial fan restoration.
 
-## First milestone
+## What's in it
 
-Built so far: splash → loading → title → options (and the Keys screen) → character select → scene
-select → a one-on-one fight between **Ed** and **Speedy** in the **Forest**, with rounds, the HUD,
-the CPU opponent, and both fighters' special moves.
+The whole original game, rebuilt from its own code:
 
-Since then:
+- **All twelve fighters**, each with their four special moves and the CPU playing them as the
+  original does. Military Muskrat, the secret twelfth, has to be unlocked (see below).
+- **All five scenes**: Forest (log elevator, tree eyes, falling acorns, birds' nests), Field
+  (butterflies), Tundra (ledges, snow and rolling snowballs), Great Wall (towers and pits) and City
+  (ledges and passing flocks of birds).
+- **One on One** against the CPU or a friend. With 2 Players, the screen splits in two when the
+  fighters get more than a screen apart.
+- **Tournament**: climb the ladder of fighters, then the win screen and the high score table (also
+  on the title screen's SCORES button).
+- **Practice**: hit a training dummy (nobody gets hurt) while tutorial tips cycle above.
+- **Options** (sound, music, blood, difficulty, round time, keys), the **credits** (click the
+  CREDITS corner of the title screen) and the original's **cheat codes**.
 
-- All five scenes are playable: Forest, Field (butterflies), Tundra (ledges, snow and rolling
-  snowballs), Great Wall (towers and pits) and City (ledges and passing flocks of birds).
-- All twelve fighters are playable in One on One, each with their four special moves and the
-  CPU playing them as the original does.
-- Tournament mode: climb the ladder of fighters, then the win screen and the high score table.
-  The SCORES button on the title screen shows the tables.
-- The theme music plays on the menus but not during fights (the original played it throughout).
-- Pausing (P) shows a move guide: the controls and every fighter's special moves in your own keys,
-  one page each, flipped with the arrow keys. (An addition: in 1999 the moves were in a separate
-  text file.)
-- 2 Players in One on One: click 2 Players on the character screen. Each player picks with their
-  walk keys (A / D and L / '), or by clicking fighters: clicks take turns, player 1 first (an
-  addition; the original only used the keys). When the fighters get more than a screen apart, the screen splits in two.
-- Practice mode: hit the training dummy (nobody gets hurt) while tutorial tips cycle above.
-- Credits: click the CREDITS corner of the title screen.
-- The title screen has no QUIT button (an addition: there's nothing to quit in a browser).
-
-Everything else on these screens is shown and animates as in the original, but does nothing when
-clicked yet:
-
-- Two on Two, and Practice or Tournament with 2 Players
-- Alert dialogs
+Not included: the original's Two on Two mode (and Practice or Tournament with 2 Players, which are
+team fights), and its Mac OS alert boxes. Their buttons are shown but do nothing.
 
 The character screen opens in Tournament mode, as the original does, so click **ONE ON ONE**
-first. The CPU picks its fighter at random.
+first for a single fight.
 
 ## Additions to the original
 
@@ -68,6 +61,14 @@ first. The CPU picks its fighter at random.
   Muskrat is the final opponent there.
 - The high-score name window is a plain rebuild: in 1999 Mac OS drew its frame and button. Its
   pictures, text and layout are the original's. High scores are saved in the browser.
+- Pausing (Esc) shows a move guide: the controls and every fighter's special moves in your own
+  keys, one page each, with a QUIT button and the menus' squirrel cursor. In 1999 the moves were in
+  a separate text file, P paused and Esc quit straight away.
+- Player 2 has new default keys that fit beside player 1's on a laptop keyboard (see Controls).
+- With 2 Players, fighters can also be picked by clicking: clicks take turns, player 1 first (the
+  original only used the keys).
+- The theme music plays on the menus but not during fights (the original played it throughout).
+- The title screen has no QUIT button: there's nothing to quit in a browser.
 
 ## Controls
 
@@ -122,6 +123,18 @@ The original draws text in the Mac's Geneva bitmap font, which can't be redistri
   `assets/fonts/`.
 - **10 pt text** (the round timer, the hint ticker, the practice tutorial, the win screen) is
   drawn with the Geneva 9 letters as a stand-in, until a freely usable 10 pt Geneva is found.
+
+## Running it locally
+
+The game is plain HTML and JavaScript modules with no build step, so it runs straight from the
+repository. Browsers won't load modules from `file://`, so serve the repository root over HTTP:
+
+```sh
+python3 -m http.server 8000
+```
+
+Then open <http://localhost:8000/>. The 640×480 screen is scaled to fill the window, keeping its 4:3
+shape. Adding `?debug` to the address unlocks Military Muskrat for testing.
 
 ## Repository
 
