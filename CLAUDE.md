@@ -293,3 +293,6 @@ capstone, and a patched deark.
 - The work branch is `claude/eloquent-curie-vv5eha`, which is also the repo's default branch.
 - Colin uses GitHub Desktop.
 - `re/` and `reference/` are ignored and must never be committed.
+- The repo is now `colinroyce/Squirrel-Kombat-Resurrektion`. GitHub Pages publishes the default branch
+  (`claude/eloquent-curie-vv5eha`, root) at https://colinroyce.github.io/Squirrel-Kombat-Resurrektion/ and
+  rebuilds on every push to it.
